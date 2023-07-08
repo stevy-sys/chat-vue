@@ -1,0 +1,54 @@
+a {
+    color: #000000 !important;
+}
+
+nav{
+    background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+}
+
+.nav-item {
+    font-family: Century Gothic;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.nav-item a {
+    color: #000000;
+    text-decoration: none;
+    font: 20px Century Gothic;
+    margin: 0px 10px;
+    padding: 10px 10px;
+    position: relative;
+    z-index: 0;
+}
+
+
+/* Top & Bottom Borders Out */
+.topBotomBordersOut a:before,
+.topBotomBordersOut a:after {
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 2px;
+    background: #000000;
+    content: "";
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.topBotomBordersOut a:before {
+    top: 0px;
+    transform: translateY(10px);
+}
+
+.topBotomBordersOut a:after {
+    bottom: 0px;
+    transform: translateY(-10px);
+}
+
+.topBotomBordersOut a:hover:before,
+.topBotomBordersOut a:hover:after {
+    opacity: 1;
+    transform: translateY(0px);
+}
