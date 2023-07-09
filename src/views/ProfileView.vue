@@ -503,3 +503,14 @@
   line-height: 18px;
 }
 </style>
+
+<script setup>
+  import { getUsers } from '../service/user.service'
+  import { onMounted , ref } from 'vue';
+
+  const users = ref([])
+
+  onMounted(() => {
+    console.log('Le composant est monté !');
+  });
+</script>

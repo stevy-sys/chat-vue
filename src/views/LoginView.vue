@@ -7,26 +7,23 @@
             <h3 class="panel-title">Login via site</h3>
           </div>
           <div class="panel-body">
-            <form accept-charset="UTF-8" role="form">
+            <form @submit.prevent="submit()" accept-charset="UTF-8" role="form">
               <fieldset>
                 <div class="form-group">
-                  <input class="form-control type_input" placeholder="yourmail@example.com" name="email" type="text">
+                  <input v-model="form.email" class="form-control type_input" placeholder="yourmail@example.com" name="email" type="text">
                 </div>
                 <div class="form-group">
-                  <input class="form-control type_input" placeholder="Password" name="password" type="password" value="">
+                  <input v-model="form.password" class="form-control type_input" placeholder="Password" name="password" type="password">
                 </div>
                 <div class="checkbox">
                   <label>
-                    <input name="remember" type="checkbox" value="Remember Me"> Remember Me
+                    <input name="remember" type="checkbox"> Remember Me
                   </label>
                 </div>
                 <input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
               </fieldset>
             </form>
             <hr />
-            <center>
-              <h4>OR</h4>
-            </center>
             <input class="btn btn-lg btn-facebook btn-block" type="submit" value="Login via facebook">
           </div>
         </div>
@@ -36,7 +33,21 @@
 </template>
 
 <script setup>
+  import { ref } from 'vue';
+  import { login } from '../service/auth.service'
+  const form = ref({
+    email:'',
+    password:'',
+  })
 
+  const submit = async () => {
+    try {
+      const response = await login(form.value)
+      console.log(response)
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
 </script>
 
 <style scoped>
