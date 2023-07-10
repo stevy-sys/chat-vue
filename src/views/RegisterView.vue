@@ -1,5 +1,5 @@
 <template>
- <div class="container">
+  <div class="container">
     <div class="row">
       <div class="col-md-12 col-md-offset-12 text-center">
         <div class="panel panel-default">
@@ -13,13 +13,16 @@
                   <input v-model="form.name" class="form-control type_input" placeholder="name" name="email" type="text">
                 </div>
                 <div class="form-group">
-                  <input  v-model="form.email" class="form-control type_input" placeholder="yourmail@example.com" name="email" type="text">
+                  <input v-model="form.email" class="form-control type_input" placeholder="yourmail@example.com"
+                    name="email" type="text">
                 </div>
                 <div class="form-group">
-                  <input v-model="form.password" class="form-control type_input" placeholder="Password" name="password" type="password">
+                  <input v-model="form.password" class="form-control type_input" placeholder="Password" name="password"
+                    type="password">
                 </div>
                 <div class="form-group">
-                  <input  v-model="form.confirm_password" class="form-control type_input" placeholder="Confirm Password" name="password" type="password">
+                  <input v-model="form.confirm_password" class="form-control type_input" placeholder="Confirm Password"
+                    name="password" type="password">
                 </div>
                 <input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
               </fieldset>
@@ -33,19 +36,34 @@
 </template>
   
 <script setup>
- import { ref } from 'vue';
- import { register } from '../service/auth.service';
-  const form = ref({
-    name:'',
-    email:'',
-    password:'',
-    confirm_password:'',
-  })
+import { ref } from 'vue';
+import { register } from '../service/auth.service';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex'
+const router = useRouter()
+const store = useStore()
 
-  const submit = async () => {
-    const response = await register(form.value)
-    console.log(response)
+const form = ref({
+  name: '',
+  email: '',
+  password: '',
+  confirm_password: '',
+})
+
+const submit = async () => {
+  const response = await register(form.value)
+  if (response.success) {
+    store.dispatch('saveToken', response.data.token)
+    store.dispatch('saveUser', response.data.user)
+    store.dispatch('setConnected', true)
+    localStorage.setItem('token', response.data.token)
+    localStorage.setItem('user', JSON.stringify(response.data.user))
+    router.push({ name: 'chat' })
+  } else {
+    alert(response.message)
   }
+
+}
 </script>
   
 <style scoped>
@@ -54,13 +72,14 @@
   background-color: #fff;
 }
 
-.type_input{
+.type_input {
   background-color: rgba(0, 0, 0, 0.3) !important;
   border: 0 !important;
   color: white !important;
   height: 60px !important;
   overflow-y: auto;
 }
+
 .btn-facebook {
   color: #ffffff;
   -webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -93,5 +112,4 @@
 .btn-facebook:active,
 .btn-facebook.active {
   background-color: #0d2456 \9 !important;
-}
-</style>
+}</style>

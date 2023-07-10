@@ -1,9 +1,10 @@
 <template>
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
   <div class="container">
     <div class="row">
-      <div class="col-lg-3 col-sm-6">
-        <div class="card hovercard">
+      <div v-for=" (user, index) in users " class="col-lg-3 col-sm-6">
+        <div class="card hovercard flip-card">
           <div class="cardheader">
           </div>
           <div class="avatar">
@@ -11,12 +12,13 @@
           </div>
           <div class="info">
             <div class="title">
-              <a target="_blank" href="https://scripteden.com/">Script Eden</a>
+              <a href="#" @click="showModal">{{ user.name }}</a>
             </div>
-            <div class="desc">Passionate designer</div>
+            <div class="desc">{{ user.email }}</div>
             <div class="desc">Curious developer</div>
             <div class="desc">Tech geek</div>
           </div>
+
           <div class="bottom">
             <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
               <i class="fa fa-twitter"></i>
@@ -32,229 +34,17 @@
             </a>
           </div>
         </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="card hovercard">
-          <div class="cardheader">
-          </div>
-          <div class="avatar">
-            <img alt="" src="../assets/tsaty.jpg">
-          </div>
-          <div class="info">
-            <div class="title">
-              <a target="_blank" href="https://scripteden.com/">Script Eden</a>
-            </div>
-            <div class="desc">Passionate designer</div>
-            <div class="desc">Curious developer</div>
-            <div class="desc">Tech geek</div>
-          </div>
-          <div class="bottom">
-            <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
-              <i class="fa fa-twitter"></i>
-            </a>
-            <a class="btn btn-danger btn-sm" rel="publisher" href="https://plus.google.com/+ahmshahnuralam">
-              <i class="fa fa-google-plus"></i>
-            </a>
-            <a class="btn btn-primary btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-              <i class="fa fa-facebook"></i>
-            </a>
-            <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-              <i class="fa fa-behance"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="card hovercard">
-          <div class="cardheader">
-          </div>
-          <div class="avatar">
-            <img alt="" src="../assets/tsaty.jpg">
-          </div>
-          <div class="info">
-            <div class="title">
-              <a target="_blank" href="https://scripteden.com/">Script Eden</a>
-            </div>
-            <div class="desc">Passionate designer</div>
-            <div class="desc">Curious developer</div>
-            <div class="desc">Tech geek</div>
-          </div>
-          <div class="bottom">
-            <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
-              <i class="fa fa-twitter"></i>
-            </a>
-            <a class="btn btn-danger btn-sm" rel="publisher" href="https://plus.google.com/+ahmshahnuralam">
-              <i class="fa fa-google-plus"></i>
-            </a>
-            <a class="btn btn-primary btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-              <i class="fa fa-facebook"></i>
-            </a>
-            <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-              <i class="fa fa-behance"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="card hovercard">
-          <div class="cardheader">
-          </div>
-          <div class="avatar">
-            <img alt="" src="../assets/tsaty.jpg">
-          </div>
-          <div class="info">
-            <div class="title">
-              <a target="_blank" href="https://scripteden.com/">Script Eden</a>
-            </div>
-            <div class="desc">Passionate designer</div>
-            <div class="desc">Curious developer</div>
-            <div class="desc">Tech geek</div>
-          </div>
-          <div class="bottom">
-            <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
-              <i class="fa fa-twitter"></i>
-            </a>
-            <a class="btn btn-danger btn-sm" rel="publisher" href="https://plus.google.com/+ahmshahnuralam">
-              <i class="fa fa-google-plus"></i>
-            </a>
-            <a class="btn btn-primary btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-              <i class="fa fa-facebook"></i>
-            </a>
-            <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-              <i class="fa fa-behance"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="card hovercard">
-          <div class="cardheader">
-          </div>
-          <div class="avatar">
-            <img alt="" src="../assets/tsaty.jpg">
-          </div>
-          <div class="info">
-            <div class="title">
-              <a target="_blank" href="https://scripteden.com/">Script Eden</a>
-            </div>
-            <div class="desc">Passionate designer</div>
-            <div class="desc">Curious developer</div>
-            <div class="desc">Tech geek</div>
-          </div>
-          <div class="bottom">
-            <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
-              <i class="fa fa-twitter"></i>
-            </a>
-            <a class="btn btn-danger btn-sm" rel="publisher" href="https://plus.google.com/+ahmshahnuralam">
-              <i class="fa fa-google-plus"></i>
-            </a>
-            <a class="btn btn-primary btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-              <i class="fa fa-facebook"></i>
-            </a>
-            <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-              <i class="fa fa-behance"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="card hovercard">
-          <div class="cardheader">
-          </div>
-          <div class="avatar">
-            <img alt="" src="../assets/tsaty.jpg">
-          </div>
-          <div class="info">
-            <div class="title">
-              <a target="_blank" href="https://scripteden.com/">Script Eden</a>
-            </div>
-            <div class="desc">Passionate designer</div>
-            <div class="desc">Curious developer</div>
-            <div class="desc">Tech geek</div>
-          </div>
-          <div class="bottom">
-            <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
-              <i class="fa fa-twitter"></i>
-            </a>
-            <a class="btn btn-danger btn-sm" rel="publisher" href="https://plus.google.com/+ahmshahnuralam">
-              <i class="fa fa-google-plus"></i>
-            </a>
-            <a class="btn btn-primary btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-              <i class="fa fa-facebook"></i>
-            </a>
-            <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-              <i class="fa fa-behance"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="card hovercard">
-          <div class="cardheader">
-          </div>
-          <div class="avatar">
-            <img alt="" src="../assets/tsaty.jpg">
-          </div>
-          <div class="info">
-            <div class="title">
-              <a target="_blank" href="https://scripteden.com/">Script Eden</a>
-            </div>
-            <div class="desc">Passionate designer</div>
-            <div class="desc">Curious developer</div>
-            <div class="desc">Tech geek</div>
-          </div>
-          <div class="bottom">
-            <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
-              <i class="fa fa-twitter"></i>
-            </a>
-            <a class="btn btn-danger btn-sm" rel="publisher" href="https://plus.google.com/+ahmshahnuralam">
-              <i class="fa fa-google-plus"></i>
-            </a>
-            <a class="btn btn-primary btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-              <i class="fa fa-facebook"></i>
-            </a>
-            <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-              <i class="fa fa-behance"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="card hovercard">
-          <div class="cardheader">
-          </div>
-          <div class="avatar">
-            <img alt="" src="../assets/tsaty.jpg">
-          </div>
-          <div class="info">
-            <div class="title">
-              <a target="_blank" href="https://scripteden.com/">Script Eden</a>
-            </div>
-            <div class="desc">Passionate designer</div>
-            <div class="desc">Curious developer</div>
-            <div class="desc">Tech geek</div>
-          </div>
-          <div class="bottom">
-            <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
-              <i class="fa fa-twitter"></i>
-            </a>
-            <a class="btn btn-danger btn-sm" rel="publisher" href="https://plus.google.com/+ahmshahnuralam">
-              <i class="fa fa-google-plus"></i>
-            </a>
-            <a class="btn btn-primary btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-              <i class="fa fa-facebook"></i>
-            </a>
-            <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-              <i class="fa fa-behance"></i>
-            </a>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+
+
+
+
 .card {
   padding-top: 20px;
   margin: 10px 0 20px 0;
@@ -505,12 +295,13 @@
 </style>
 
 <script setup>
-  import { getUsers } from '../service/user.service'
-  import { onMounted , ref } from 'vue';
+import { getUsers } from '../service/user.service'
+import { onMounted, ref } from 'vue';
 
-  const users = ref([])
 
-  onMounted(() => {
-    console.log('Le composant est monté !');
-  });
+const users = ref([])
+onMounted(async () => {
+  let response = await getUsers()
+  users.value = response.data.user
+});
 </script>

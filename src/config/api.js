@@ -8,8 +8,9 @@ export const routeAPi = {
 
 
     //chat
-    conversation:routeBasic + '/chat/allConversation',
-    allDiscussion:routeBasic + 'chat/allDiscussion/',
+    conversation:routeBasic + '/all-conversation',
+    allDiscussion:routeBasic + '/all-discussion',
+    sendMessage:routeBasic + '/send-message',
 
 
     //user
