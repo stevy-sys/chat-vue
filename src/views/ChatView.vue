@@ -22,98 +22,54 @@
               </div>
 
 
+              <div class="d-flex justify-content-around mt-3 mb-1">
+                <button @click="changeTypeConversation('prive')"
+                  :class="typeConversation == 'prive' ? 'btn-primary' : 'btn-secondary'" class="btn">prive</button>
+                <button @click="changeTypeConversation('groupe')"
+                  :class="typeConversation == 'groupe' ? 'btn-primary' : 'btn-secondary'" class="btn">groupe</button>
+              </div>
             </div>
             <div class="card-body contacts_body">
-              <ui class="contacts">
+              <ul class="contacts">
                 <!-- class active -->
-                <li @click="changeConversation(conversation)" v-for="(conversation, index) in  conversationPrive">
-                  <div class="d-flex bd-highlight">
-                    <div class="img_cont">
-                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                        class="rounded-circle user_img">
-                      <span class="online_icon"></span>
+                <div v-if="typeConversation == 'prive'">
+                  <li :class="conversation.active ? 'active' : ''" @click="changeConversation(conversation)"
+                    v-for="(conversation, index) in  conversationPrive">
+                    <div class="d-flex bd-highlight">
+                      <div class="img_cont">
+                        <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                          class="rounded-circle user_img">
+                        <span :class="!isConnected(conversation.talked.user) ? 'offline' : '' " class="online_icon"></span>
+                      </div>
+                      <div class="user_info">
+                        <span>{{ conversation.talked.user.name }}</span>
+                        <p class="lastMessage">{{ conversation.last_message.message }}</p>
+                      </div>
                     </div>
-                    <div class="user_info">
-                      <span>{{ conversation.talked.user.name }}</span>
-                      <p class="lastMessage">{{ conversation.last_message.message }}</p>
+                  </li>
+                </div>
+                <div v-else>
+                  <li :class="conversation.active ? 'active' : ''" @click="changeConversation(conversation)"
+                    v-for="(conversation, index) in  conversationGroupe">
+                    <div class="d-flex bd-highlight">
+                      <div class="img_cont">
+                        <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                          class="rounded-circle user_img">
+                        <span  class="online_icon"></span>
+                        <!-- <span class="online_icon offline"></span> -->
+                      </div>
+                      <div class="user_info">
+                        <span>{{ conversation.name }}</span>
+                        <p class="lastMessage">{{ conversation.last_message.message }}</p>
+                      </div>
                     </div>
-                  </div>
-                </li>
-                <li @click="changeConversation(conversation)" v-for="(conversation, index) in  conversationGroupe">
-                  <div class="d-flex bd-highlight">
-                    <div class="img_cont">
-                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                        class="rounded-circle user_img">
-                      <span class="online_icon"></span>
-                    </div>
-                    <div class="user_info">
-                      <span>{{ conversation.name }}</span>
-                      <p class="lastMessage">{{ conversation.last_message.message }}</p>
-                    </div>
-                  </div>
-                </li>
+                  </li>
+                </div>
                 <!--  -->
-              </ui>
+              </ul>
             </div>
           </div>
         </div>
-        <!-- 
-          <li>
-                  <div class="d-flex bd-highlight">
-                    <div class="img_cont">
-                      <img
-                        src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg"
-                        class="rounded-circle user_img">
-                      <span class="online_icon offline"></span>
-                    </div>
-                    <div class="user_info">
-                      <span>Taherah Big</span>
-                      <p>Taherah left 7 mins ago</p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex bd-highlight">
-                    <div class="img_cont">
-                      <img src="https://i.pinimg.com/originals/ac/b9/90/acb990190ca1ddbb9b20db303375bb58.jpg"
-                        class="rounded-circle user_img">
-                      <span class="online_icon"></span>
-                    </div>
-                    <div class="user_info">
-                      <span>Sami Rafi</span>
-                      <p>Sami is online</p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex bd-highlight">
-                    <div class="img_cont">
-                      <img src="http://profilepicturesdp.com/wp-content/uploads/2018/07/sweet-girl-profile-pictures-9.jpg"
-                        class="rounded-circle user_img">
-                      <span class="online_icon offline"></span>
-                    </div>
-                    <div class="user_info">
-                      <span>Nargis Hawa</span>
-                      <p>Nargis left 30 mins ago</p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex bd-highlight">
-                    <div class="img_cont">
-                      <img src="https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg"
-                        class="rounded-circle user_img">
-                      <span class="online_icon offline"></span>
-                    </div>
-                    <div class="user_info">
-                      <span>Rashid Samim</span>
-                      <p>Rashid left 50 mins ago</p>
-                    </div>
-                  </div>
-                </li>
-         -->
-
-
         <div class="col-md-4 col-xl-6 chat">
           <div class="card">
             <div v-if="action != 'new'" class="card-header msg_head">
@@ -127,7 +83,8 @@
                   <p>{{ conversationActive.name }}</p>
                 </div>
                 <div v-else class="user_info">
-                  <span>{{ conversationActive.name }}</span>
+                  <span>{{ conversationActive.name }}</span> <br>
+                  <span v-for="(membre,index) in conversationActive.membres ">{{ membre.user.name }} ,</span>
                   <!-- <p>{{ conversationActive.name }}</p> -->
                 </div>
                 <div class="video_cam">
@@ -147,7 +104,7 @@
             </div>
             <div class="card-body msg_card_body" ref="discussionContainer">
               <div v-if="action != 'new'">
-                <div v-for="(discussion, index) in discussions" >
+                <div v-for="(discussion, index) in discussions">
                   <div v-if="discussion.user_id !== auth.id" class="d-flex justify-content-start mb-4">
                     <div class="img_cont_msg">
                       <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
@@ -247,9 +204,9 @@
           <div class="card mb-sm-3 mb-md-0 contacts_card">
 
             <div class="card-body friends">
-              <ui class="photo">
+              <ul class="photo">
                 <img src="../assets/tsaty.jpg" class="photo-profile" alt="">
-              </ui>
+              </ul>
               <div @click="onUpdate()" class="desciption">
                 <div v-if="update">
                   <div class="card-footer">
@@ -285,9 +242,11 @@ import { computed, onMounted, ref } from 'vue';
 import { useStore } from 'vuex'
 import { getAllConversation, getAllMessage, sendMessage } from '../service/chat.service'
 import { getUsers } from '../service/user.service';
+import { echo } from '../config/echo';
 const store = useStore()
 
 const discussionContainer = ref(null);
+const typeConversation = ref('prive');
 const update = ref(false);
 const conversationPrive = ref([]);
 const conversationGroupe = ref([]);
@@ -312,6 +271,31 @@ const onUpdate = () => {
 const updateCompled = () => {
   update.value = false;
 }
+const initActiveConversation = () => {
+  conversationPrive.value = conversationPrive.value.filter(element => {
+    element.active = false
+    return element
+  })
+  conversationGroupe.value = conversationGroupe.value.filter(element => {
+    element.active = false
+    return element
+  })
+}
+
+const activeConversation = (conversation) => {
+  conversationPrive.value = conversationPrive.value.filter(element => {
+    if (element.id == conversation.id) {
+      element.active = true
+    }
+    return element
+  })
+  conversationGroupe.value = conversationGroupe.value.filter(element => {
+    if (element.id == conversation.id) {
+      element.active = true
+    }
+    return element
+  })
+}
 
 const verifUserSelected = (user) => {
   let exist = userSelected.value.filter(element => {
@@ -330,6 +314,7 @@ const changeAction = async () => {
       action.value = await "existant"
     }
   } else {
+    form.value.conversation_id = null
     action.value = await "new"
     conversationActive.value = await null
   }
@@ -359,21 +344,88 @@ const reformatUserSelected = (users) => {
   });
   return data
 }
+const isConnected = (user) => {
+  let exist = store.getters.getUsersEnLigne.filter(element => {
+    return element.id == user.id
+  })
+  return exist.length > 0 ? true : false 
+}
+
 onMounted(async () => {
   let response = await getAllConversation()
   let res = await getUsers()
   allUsers.value = res.data.user
   conversationPrive.value = response.data.conversationPrive
   conversationGroupe.value = response.data.conversationGroupe
+  initActiveConversation()
+  console.log('test')
+
 });
 
+echo.private('user-' + store.getters.getUser.id).listen('.newMessage', (e) => {
+  console.log(e)
+  if (conversationActive.value) {
+    if (e.conversation.id == conversationActive.value.id) {
+      discussions.value.push(e.message)
+      scroolTo()
+    }
+  }
+
+  if (e.conversation.type == 'prive') {
+    if (isConversationPriveExiste(e.conversation)) {
+      insereLastMessageInConversation(e.conversation.type,e.message,e.conversation)
+    }else{
+      conversationPrive.value.push(e.conversation)
+    }
+  }else{
+    if (isConversationGroupeExiste(e.conversation)) {
+      insereLastMessageInConversation(e.conversation.type,e.message,e.conversation)
+    }else{
+      conversationGroupe.value.push(e.conversation)
+    }
+  }
+  reorganistaeConversation()
+});
+
+const isConversationPriveExiste = (conversation) => {
+  let exist = conversationPrive.value.filter(con => {
+    return conversation.id == con.id
+  })
+  return exist.length > 0 ? true : false;
+}
+
+const isConversationGroupeExiste = (conversation) => {
+  let exist = conversationGroupe.value.filter(con => {
+    return conversation.id == con.id
+  })
+  return exist.length > 0 ? true : false;
+}
+
+const searchUserConversation = (user,type,conversation=null) => {
+  if (type == 'prive') {
+    let exist = conversationPrive.value.filter(con => {
+      return con.talked.user.id == user.id
+    })
+    return exist.length > 0 ? true : false;
+  }else{
+    let exist = conversationGroupe.value.filter(con => {
+      return con.id == conversation.id
+    })
+    return exist.length > 0 ? true : false;
+  }
+}
+
+
+
 const changeConversation = async (conversation) => {
+  initActiveConversation()
+  activeConversation(conversation)
   const response = await getAllMessage(conversation.id)
   discussions.value = response.data
   conversationActive.value = conversation
   action.value = await "existant"
   updateForm(conversation)
-
+  scroolTo()
 }
 
 const updateForm = (conversation) => {
@@ -386,33 +438,37 @@ const updateForm = (conversation) => {
   form.value.type = conversation.type
 }
 
+const changeTypeConversation = (type) => {
+  typeConversation.value = type
+}
 
 const scroolTo = () => {
   const container = discussionContainer.value;
-    const start = container.scrollTop;
-    const end = container.scrollHeight;
-    const duration = 500; // Durée de l'animation en millisecondes
-    const startTime = performance.now();
+  const start = container.scrollTop;
+  const end = container.scrollHeight;
+  const duration = 500; // Durée de l'animation en millisecondes
+  const startTime = performance.now();
 
-    const animateScroll = (currentTime) => {
-      const elapsedTime = currentTime - startTime;
-      const position = easeInOut(elapsedTime, start, end - start, duration);
-      container.scrollTop = position;
+  const animateScroll = (currentTime) => {
+    const elapsedTime = currentTime - startTime;
+    const position = easeInOut(elapsedTime, start, end - start, duration);
+    container.scrollTop = position;
 
-      if (elapsedTime < duration) {
-        requestAnimationFrame(animateScroll);
-      }
-    };
+    if (elapsedTime < duration) {
+      requestAnimationFrame(animateScroll);
+    }
+  };
 
-    const easeInOut = (t, b, c, d) => {
-      t /= d / 2;
-      if (t < 1) return c / 2 * t * t + b;
-      t--;
-      return -c / 2 * (t * (t - 2) - 1) + b;
-    };
+  const easeInOut = (t, b, c, d) => {
+    t /= d / 2;
+    if (t < 1) return c / 2 * t * t + b;
+    t--;
+    return -c / 2 * (t * (t - 2) - 1) + b;
+  };
 
-    requestAnimationFrame(animateScroll);
+  requestAnimationFrame(animateScroll);
 }
+
 
 const sendMessageTo = async () => {
   if (form.value.message.length < 6) {
@@ -420,34 +476,57 @@ const sendMessageTo = async () => {
   }
   form.value.user_id = reformatUserSelected(userSelected.value)
   const response = await sendMessage(form.value)
-  discussions.value.push(response.data)
+  const convers = response.data.conversation;
   scroolTo()
-  if (form.value.type == 'prive') {
-    conversationPrive.value = conversationPrive.value.filter(con => {
-      if (con.id == response.data.conversation_id) {
-        con.last_message = response.data
-      }
-      return con
-    })
-    conversationPrive.value.sort((a, b) => {
-      const dateA = new Date(a.last_message.created_at);
-      const dateB = new Date(b.last_message.created_at);
-      return dateB - dateA;
-    });
+  if (convers.type == 'prive') {
+    if (searchUserConversation(convers.talked.user,'prive',convers)) {
+      insereLastMessageInConversation('prive',response.data,convers)
+    } else {
+      conversationPrive.value.push(convers)
+    }
   } else {
+    if (searchUserConversation(convers.talked.user,'groupe',convers)) {
+      insereLastMessageInConversation('groupe',response.data,convers)
+    }else{
+      conversationGroupe.value.push(convers)
+    }
+  }
+  changeConversation(convers)
+  discussions.value.push(response.data)
+  reorganistaeConversation()
+  form.value.message = ''
+}
+
+const insereLastMessageInConversation = (type,message,conversation) => {
+  if (type == 'groupe') {
     conversationGroupe.value = conversationGroupe.value.filter(con => {
-      if (con.id == response.data.conversation_id) {
-        con.last_message = response.data
+      if (con.id == conversation.id) {
+        con.last_message = message
       }
       return con
     })
-    conversationGroupe.value.sort((a, b) => {
-      const dateA = new Date(a.last_message.created_at);
-      const dateB = new Date(b.last_message.created_at);
-      return dateB - dateA;
-    });
+  }else{
+    conversationPrive.value = conversationPrive.value.filter(con => {
+        if (con.id == conversation.id) {
+          con.last_message = message
+        }
+        return con
+      })
   }
+}
 
+const reorganistaeConversation = () => {
+  conversationPrive.value.sort((a, b) => {
+    const dateA = new Date(a.last_message.created_at);
+    const dateB = new Date(b.last_message.created_at);
+    return dateB - dateA;
+  });
+
+  conversationGroupe.value.sort((a, b) => {
+    const dateA = new Date(a.last_message.created_at);
+    const dateB = new Date(b.last_message.created_at);
+    return dateB - dateA;
+  });
 }
 </script>
 
@@ -557,4 +636,5 @@ a {
 
 .mt-1 {
   margin-top: 0.25rem !important;
-}</style>
+}
+</style>

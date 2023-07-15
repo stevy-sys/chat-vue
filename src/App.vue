@@ -33,6 +33,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import {useStore} from 'vuex'
 import {computed} from 'vue'
 import { useRouter } from 'vue-router';
+import { echo } from './config/echo';
 
 const router = useRouter()
 const store = useStore()
@@ -43,7 +44,29 @@ const deconnexion = () => {
   localStorage.removeItem('user')
   store.dispatch('setInitialiseState')
   router.push({name:"login"})
+  store.dispatch('deleteUserEnLigne',store.getters.getUser)
 }
+
+echo.join(`presence-user`)
+    .here((users) => {
+      store.dispatch('setUserEnLigne',users)
+    })
+    .joining((user) => {
+      store.dispatch('addUserEnLigne',user)
+    })
+    .leaving((user) => {
+      store.dispatch('deleteUserEnLigne',user)
+    })
+    .listen('.presenceAction',(e) => {
+      console.log('action',e)
+      if (e.action == 'connexion') {
+        store.dispatch('addUserEnLigne',e.user)
+      }
+      if (e.action == 'deconnexion') {
+        store.dispatch('deleteUserEnLigne',e.user)
+      }
+    })
+
 </script>
 
 

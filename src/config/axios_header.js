@@ -1,14 +1,16 @@
-let token =  localStorage.getItem("token");
-let header = null
-if(token){
-    header = {
-        'Content-type': 'application/json',
-        'Authorization':'Bearer ' + token
-    } 
-}else{
-    header = {
-        'Content-type': 'application/json',
-    } 
-}
+let header = {
+    'Content-Type': 'application/json',
+};
 
-export const headers = header ;
+const updateTokenHeader = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        header.Authorization = `Bearer ${token}`;
+    } else {
+        delete header.Authorization;
+    }
+};
+
+updateTokenHeader();
+
+export const headers = header;

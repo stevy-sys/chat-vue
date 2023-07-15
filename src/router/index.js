@@ -8,7 +8,7 @@ const route = [
   {
     path: '/',
     name: 'chat',
-    component: ChatView,
+    component: () => import('../views/ChatView.vue'),
     meta: { requiresAuth: true }
   },
   {

@@ -4,9 +4,21 @@ const store = createStore({
     state:{
         token:'',
         user:{},
-        connected:false
+        connected:false,
+        userEnLigne:[]
     },
     mutations:{
+        SET_USER_EN_LIGNE(state,users){
+            state.userEnLigne = users
+        },
+        ADD_USER_EN_LIGNE(state,user){
+            state.userEnLigne.push(user)
+        },
+        DELETE_USER_EN_LIGNE(state,user){
+            state.userEnLigne = state.userEnLigne.filter(u => {
+                return u.id != user.id
+            })
+        },
         SET_TOKEN(state,token){
             state.token = token
         },
@@ -23,6 +35,15 @@ const store = createStore({
         }
     },
     actions:{
+        setUserEnLigne({commit},users){
+            commit('SET_USER_EN_LIGNE',users)
+        },
+        addUserEnLigne({commit},user){
+            commit('ADD_USER_EN_LIGNE',user)
+        },
+        deleteUserEnLigne({commit},user){
+            commit('DELETE_USER_EN_LIGNE',user)
+        },
         saveToken({commit},token){
             commit('SET_TOKEN',token)
         },
@@ -41,9 +62,15 @@ const store = createStore({
         getConnected(state){
             return state.connected
         },
+        getToken(state){
+            return state.token
+        },
         getUser(state){
             return state.user
-        }
+        },
+        getUsersEnLigne(state){
+            return state.userEnLigne
+        },
     },
     modules:{
 
