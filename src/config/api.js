@@ -3,8 +3,8 @@ import { routeBasic } from "."
 export const routeAPi = {
 
     //authentification
-    login:routeBasic + '/connexion/' ,
-    register:routeBasic + '/register/' ,
+    login:routeBasic + '/connexion' ,
+    register:routeBasic + '/register' ,
 
 
     //chat
@@ -15,5 +15,5 @@ export const routeAPi = {
 
     //user
     myProfil:routeBasic + '/user/',
-    allUsers:routeBasic + '/all-user/'
+    allUsers:routeBasic + '/all-user'
 }

@@ -39,7 +39,6 @@ import { ref } from 'vue';
 import { login } from '../service/auth.service'
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex'
-import { headers } from '../config/axios_header';
 const router = useRouter()
 const store = useStore()
 const form = ref({
@@ -56,7 +55,6 @@ const submit = async () => {
       await store.dispatch('setConnected',true)
       await localStorage.setItem('token', response.data.token)
       await localStorage.setItem('user',JSON.stringify(response.data.user))
-      console.log(headers)
       // await store.dispatch('addUserEnLigne',response.data.user)
       await router.push({ name: 'chat' })
     } else {
