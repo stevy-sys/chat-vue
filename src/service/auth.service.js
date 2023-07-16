@@ -6,6 +6,9 @@ import { headers } from "../config/axios_header";
 const updateTokenHeader = () => {
     let headers = {
         'Content-Type': 'application/json',
+        'Origin': window.location.origin,
+        'Access-Control-Request-Method': 'GET, POST, PUT, DELETE',
+        'Access-Control-Request-Headers': 'Content-Type, Authorization',
     };
     const token = localStorage.getItem('token');
     if (token) {
