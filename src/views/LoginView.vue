@@ -88,7 +88,7 @@ const submit = async () => {
   -webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #2b4b90;
-  *background-color: #133783;
+  background-color: #133783;
   background-image: -moz-linear-gradient(top, #3b5998, #133783);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3b5998), to(#133783));
   background-image: -webkit-linear-gradient(top, #3b5998, #133783);
@@ -109,7 +109,7 @@ const submit = async () => {
 .btn-facebook[disabled] {
   color: #ffffff;
   background-color: #133783 !important;
-  *background-color: #102e6d !important;
+  background-color: #102e6d !important;
 }
 
 .btn-facebook:active,
