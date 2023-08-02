@@ -1,2 +1,2 @@
-const api = "http://localhost:5000";
+const api = "https://dev.rubycorp.fr";
 export const routeBasic = api + '/api'
