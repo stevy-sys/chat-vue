@@ -242,7 +242,7 @@ import { computed, onMounted, ref } from 'vue';
 import { useStore } from 'vuex'
 import { getAllConversation, getAllMessage, sendMessage } from '../service/chat.service'
 import { getUsers } from '../service/user.service';
-import { echo } from '../config/echo';
+// import { echo } from '../config/echo';
 const store = useStore()
 
 const discussionContainer = ref(null);
@@ -354,38 +354,38 @@ const isConnected = (user) => {
 onMounted(async () => {
   let response = await getAllConversation()
   let res = await getUsers()
-  allUsers.value = res.data.user
-  conversationPrive.value = response.data.conversationPrive
-  conversationGroupe.value = response.data.conversationGroupe
+  allUsers.value = res.users
+  conversationPrive.value = response.prive
+  conversationGroupe.value = response.groupe
   initActiveConversation()
   console.log('test')
 
 });
 
-echo.private('user-' + store.getters.getUser.id).listen('.newMessage', (e) => {
-  console.log(e)
-  if (conversationActive.value) {
-    if (e.conversation.id == conversationActive.value.id) {
-      discussions.value.push(e.message)
-      scroolTo()
-    }
-  }
+// echo.private('user-' + store.getters.getUser.id).listen('.newMessage', (e) => {
+//   console.log(e)
+//   if (conversationActive.value) {
+//     if (e.conversation.id == conversationActive.value.id) {
+//       discussions.value.push(e.message)
+//       scroolTo()
+//     }
+//   }
 
-  if (e.conversation.type == 'prive') {
-    if (isConversationPriveExiste(e.conversation)) {
-      insereLastMessageInConversation(e.conversation.type,e.message,e.conversation)
-    }else{
-      conversationPrive.value.push(e.conversation)
-    }
-  }else{
-    if (isConversationGroupeExiste(e.conversation)) {
-      insereLastMessageInConversation(e.conversation.type,e.message,e.conversation)
-    }else{
-      conversationGroupe.value.push(e.conversation)
-    }
-  }
-  reorganistaeConversation()
-});
+//   if (e.conversation.type == 'prive') {
+//     if (isConversationPriveExiste(e.conversation)) {
+//       insereLastMessageInConversation(e.conversation.type,e.message,e.conversation)
+//     }else{
+//       conversationPrive.value.push(e.conversation)
+//     }
+//   }else{
+//     if (isConversationGroupeExiste(e.conversation)) {
+//       insereLastMessageInConversation(e.conversation.type,e.message,e.conversation)
+//     }else{
+//       conversationGroupe.value.push(e.conversation)
+//     }
+//   }
+//   reorganistaeConversation()
+// });
 
 const isConversationPriveExiste = (conversation) => {
   let exist = conversationPrive.value.filter(con => {
@@ -421,7 +421,7 @@ const changeConversation = async (conversation) => {
   initActiveConversation()
   activeConversation(conversation)
   const response = await getAllMessage(conversation.id)
-  discussions.value = response.data
+  discussions.value = response.message
   conversationActive.value = conversation
   action.value = await "existant"
   updateForm(conversation)
@@ -429,10 +429,10 @@ const changeConversation = async (conversation) => {
 }
 
 const updateForm = (conversation) => {
-  let user = []
-  conversation.membres.forEach(element => {
-    user.push(element.user_id)
-  });
+  // let user = []
+  // conversation.membres.forEach(element => {
+  //   user.push(element.user_id)
+  // });
   form.value.conversation_id = conversation.id ? conversation.id : null
   form.value.user_id = []
   form.value.type = conversation.type

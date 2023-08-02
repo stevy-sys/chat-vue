@@ -1,33 +1,18 @@
 import axios from "axios"
 import { routeAPi } from "../config/api";
-import { headers } from "../config/axios_header";
-
-
-const updateTokenHeader = () => {
-    let headers = {
-        'Content-Type': 'application/json',
-        'Origin': window.location.origin,
-        'Access-Control-Request-Method': 'GET, POST, PUT, DELETE',
-        'Access-Control-Request-Headers': 'Content-Type, Authorization',
-    };
-    const token = localStorage.getItem('token');
-    if (token) {
-        headers.Authorization = `Bearer ${token}`;
-    } else {
-        delete headers.Authorization;
-    }
-    return headers ;
-};
+axios.defaults.withCredentials = true;
 
 export function login(data) {
-    return axios.post(routeAPi.login,data,updateTokenHeader())
-            .then(response => response.data)
+    return axios.post(routeAPi.login,data)
+            .then(response =>{ 
+                return response.data
+            })
             .catch(error => { console.error(error);})
 
 }
 
 export function register(data) {
-    return axios.post(routeAPi.register,data,updateTokenHeader())
+    return axios.post(routeAPi.register,data)
         .then(response => {return response.data})
         .catch(error => console.error(error))
 }

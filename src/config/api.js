@@ -1,19 +1,20 @@
 import { routeBasic } from "."
 
 export const routeAPi = {
-
+    test:"/test",
     //authentification
-    login:routeBasic + '/connexion' ,
-    register:routeBasic + '/register' ,
+    login:routeBasic + '/auth/connexion' ,
+    register:routeBasic + '/auth/register' ,
+    deconnect:routeBasic + '/auth/deconnect' ,
 
 
     //chat
-    conversation:routeBasic + '/all-conversation',
-    allDiscussion:routeBasic + '/all-discussion',
-    sendMessage:routeBasic + '/send-message',
+    conversation:routeBasic + '/chat/all-conversation',
+    allDiscussion:routeBasic + '/chat/all-discussion',
+    sendMessage:routeBasic + '/chat/send-message',
 
 
     //user
     myProfil:routeBasic + '/user/',
-    allUsers:routeBasic + '/all-user'
+    allUsers:routeBasic + '/user'
 }

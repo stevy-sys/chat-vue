@@ -39,6 +39,8 @@ import { ref } from 'vue';
 import { login } from '../service/auth.service'
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex'
+import axios from "axios"
+
 const router = useRouter()
 const store = useStore()
 const form = ref({
@@ -46,15 +48,16 @@ const form = ref({
   password: '',
 })
 
+
 const submit = async () => {
   try {
     const response = await login(form.value)
-    if (response.success) {
-      await store.dispatch('saveToken',response.data.token)
-      await store.dispatch('saveUser',response.data.user)
+    if (response.token) {
+      await store.dispatch('saveToken',response.token)
+      await store.dispatch('saveUser',response.user)
       await store.dispatch('setConnected',true)
-      await localStorage.setItem('token', response.data.token)
-      await localStorage.setItem('user',JSON.stringify(response.data.user))
+      await localStorage.setItem('token', response.token)
+      await localStorage.setItem('user',JSON.stringify(response.user))
       // await store.dispatch('addUserEnLigne',response.data.user)
       await router.push({ name: 'chat' })
     } else {
