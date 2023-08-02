@@ -1,6 +1,6 @@
 import axios from "axios"
 import { routeAPi } from "../config/api";
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 
 export function login(data) {
     return axios.post(routeAPi.login,data)
