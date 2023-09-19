@@ -3,9 +3,9 @@ import { routeBasic } from "."
 export const routeAPi = {
     test:"/test",
     //authentification
-    login:routeBasic + '/auth/connexion' ,
-    register:routeBasic + '/auth/register' ,
-    deconnect:routeBasic + '/auth/deconnect' ,
+    login:routeBasic + '/connexion' ,
+    register:routeBasic + '/register' ,
+    deconnect:routeBasic + '/deconnect' ,
 
 
     //chat
