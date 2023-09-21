@@ -6,9 +6,7 @@ import { headers } from "../config/axios_header";
 
 export function login(data) {
     return axios.post(routeAPi.login,data)
-            .then(response =>{ 
-                return response.data.data
-            })
+            .then(response => response.data.data )
             .catch(error => { console.error(error);})
 
 }

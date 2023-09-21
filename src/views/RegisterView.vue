@@ -58,6 +58,7 @@ const form = ref({
 const submit = async () => {
   const response = await register(form.value)
   if (response.success) {
+    router.push({ name: 'chat' })
     store.dispatch('saveToken', response.data.token)
     store.dispatch('saveUser', response.data.user)
     store.dispatch('setConnected', true)

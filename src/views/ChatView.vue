@@ -192,8 +192,7 @@
                 <textarea v-model="form.message" name="" class="form-control type_msg"
                   placeholder="Type your message..."></textarea>
                 <div class="input-group-append">
-                  <span @click="sendMessageTo()" class="input-group-text send_btn"><i
-                      class="fas fa-location-arrow"></i></span>
+                  <span @click="sendMessageTo()" class="input-group-text send_btn">Envoyer</span>
                 </div>
               </div>
             </div>

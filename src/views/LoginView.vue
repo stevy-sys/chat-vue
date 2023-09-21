@@ -53,16 +53,16 @@ const submit = async () => {
   try {
     const response = await login(form.value)
     console.log(response)
-    if (response.token) {
+    if (response) {
       await store.dispatch('saveToken',response.token)
       await store.dispatch('saveUser',response.user)
       await store.dispatch('setConnected',true)
       await localStorage.setItem('token', response.token)
       await localStorage.setItem('user',JSON.stringify(response.user))
-      await store.dispatch('addUserEnLigne',response.data.user)
+      await store.dispatch('addUserEnLigne',response.user)
       await router.push({ name: 'chat' })
     } else {
-      alert(response.message)
+      alert('error authentication')
     }
   } catch (error) {
     console.error(error.message)
