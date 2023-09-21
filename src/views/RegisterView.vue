@@ -27,6 +27,9 @@
                 <input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
               </fieldset>
             </form>
+            <label>
+                <div> Have acount ? <RouterLink class="nav-link" to="/login">sign in</RouterLink></div>
+              </label>
             <hr />
           </div>
         </div>
@@ -40,6 +43,8 @@ import { ref } from 'vue';
 import { register } from '../service/auth.service';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex'
+import { RouterLink } from 'vue-router'
+
 const router = useRouter()
 const store = useStore()
 

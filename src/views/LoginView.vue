@@ -19,7 +19,7 @@
                 </div>
                 <div class="checkbox">
                   <label>
-                    <input name="remember" type="checkbox"> Remember Me
+                    <div> Have not acount ? <RouterLink class="nav-link" to="/register">register</RouterLink></div>
                   </label>
                 </div>
                 <input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
@@ -37,9 +37,9 @@
 <script setup>
 import { ref } from 'vue';
 import { login } from '../service/auth.service'
+import { RouterLink } from 'vue-router'
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex'
-import axios from "axios"
 
 const router = useRouter()
 const store = useStore()
