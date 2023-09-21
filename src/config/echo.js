@@ -30,7 +30,7 @@ export const echo = new Echo({
     wsHost: 'ws.pusher.com', // Remplacez par l'hôte WebSocket de Pusher en ligne
     wsPort: 443, // Port WebSocket de Pusher en ligne (par défaut 443)
     disableStats: true, // Désactivez les statistiques si nécessaire
-    authEndpoint: 'http://127.0.0.1:8000/api/broadcasting/auth', // Remplacez par l'URL de votre point d'authentification
+    authEndpoint: 'https://chat.rubycorp.fr/api/broadcasting/auth', // Remplacez par l'URL de votre point d'authentification
     auth: {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token'),
