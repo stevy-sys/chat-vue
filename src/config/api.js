@@ -9,12 +9,12 @@ export const routeAPi = {
 
 
     //chat
-    conversation:routeBasic + '/chat/all-conversation',
-    allDiscussion:routeBasic + '/chat/all-discussion',
-    sendMessage:routeBasic + '/chat/send-message',
+    conversation:routeBasic + '/all-conversation',
+    allDiscussion:routeBasic + '/all-discussion',
+    sendMessage:routeBasic + '/send-message',
 
 
     //user
     myProfil:routeBasic + '/user/',
-    allUsers:routeBasic + '/user'
+    allUsers:routeBasic + '/all-user'
 }

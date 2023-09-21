@@ -26,7 +26,7 @@
               </fieldset>
             </form>
             <hr />
-            <input class="btn btn-lg btn-facebook btn-block" type="submit" value="Login via facebook">
+            <input @click="test()" class="btn btn-lg btn-facebook btn-block" type="submit" value="Login via facebook">
           </div>
         </div>
       </div>
@@ -52,13 +52,14 @@ const form = ref({
 const submit = async () => {
   try {
     const response = await login(form.value)
+    console.log(response)
     if (response.token) {
       await store.dispatch('saveToken',response.token)
       await store.dispatch('saveUser',response.user)
       await store.dispatch('setConnected',true)
       await localStorage.setItem('token', response.token)
       await localStorage.setItem('user',JSON.stringify(response.user))
-      // await store.dispatch('addUserEnLigne',response.data.user)
+      await store.dispatch('addUserEnLigne',response.data.user)
       await router.push({ name: 'chat' })
     } else {
       alert(response.message)
